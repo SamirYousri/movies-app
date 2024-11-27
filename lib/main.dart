@@ -1,34 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:movies_app/data/data_sources/movie_remote_data_source.dart';
+import 'package:movies_app/data/repositories/movie_repository_impl.dart';
 import 'package:movies_app/domain/use_case/get_movies_use_case.dart';
 import 'package:movies_app/domain/use_case/search_movies_use_case.dart';
 import 'package:movies_app/presentation/managers/home_cubit/home_cubit.dart';
 import 'package:movies_app/presentation/managers/search_cubit/search_cubit.dart';
 import 'package:movies_app/presentation/views/details_view.dart';
-import 'package:movies_app/presentation/views/home_view.dart';
 import 'package:movies_app/presentation/views/search_view.dart';
-import 'package:movies_app/presentation/views/splash_view.dart';
-
-import 'data/repositories/movie_repository_impl.dart';
-
-import 'package:http/http.dart' as http;
+import 'package:movies_app/presentation/views/widgets/bottom_navigation_view.dart';
 
 void main() {
-  final remoteDatasource = MovieRemoteDatasource(http.Client());
-  final movieRepository = MovieRepositoryImpl(remoteDatasource);
+  // إعداد Dio والـ Repository والـ UseCases
+  final dio = Dio();
+  final movieRemoteDatasource = MovieRemoteDatasource(dio);
+  final movieRepository = MovieRepositoryImpl(movieRemoteDatasource);
 
-  runApp(MoviesApp(
-    homeCubit: HomeCubit(GetMoviesUseCase(movieRepository)),
-    searchCubit: SearchCubit(SearchMoviesUseCase(movieRepository)),
+  runApp(MyApp(
+    homeCubit: HomeCubit(GetMovies(movieRepository)),
+    searchCubit: SearchCubit(SearchMovies(movieRepository)),
   ));
 }
 
-class MoviesApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   final HomeCubit homeCubit;
   final SearchCubit searchCubit;
 
-  const MoviesApp({
+  const MyApp({
     super.key,
     required this.homeCubit,
     required this.searchCubit,
@@ -43,13 +42,15 @@ class MoviesApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark(),
-        initialRoute: '/splash',
+        title: 'Movies App',
+        theme: ThemeData.dark().copyWith(
+          scaffoldBackgroundColor: Colors.black,
+        ),
+        initialRoute: '/',
         routes: {
-          '/splash': (context) => const SplashScreen(),
-          '/home': (context) => const HomeScreen(),
-          '/search': (context) => const SearchScreen(),
+          '/': (context) => const BottomNavigationScreen(),
           '/details': (context) => const DetailsScreen(),
+          '/search': (context) => const SearchScreen(),
         },
       ),
     );

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -13,7 +15,7 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Center(
         child: Image.asset(
-          'assets/images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg', // استبدل بالرابط المناسب
+          'assets/images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg', // استخدم رابط صورة مناسب
           height: 200,
         ),
       ),

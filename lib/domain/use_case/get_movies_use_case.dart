@@ -2,12 +2,12 @@ import 'package:movies_app/domain/entities/movie_entity.dart';
 
 import '../repositories/movie_repository.dart';
 
-class GetMoviesUseCase {
+class GetMovies {
   final MovieRepository repository;
 
-  GetMoviesUseCase(this.repository);
+  GetMovies(this.repository);
 
-  Future<List<MovieEntity>> call() async {
+  Future<List<Movie>> call() async {
     return await repository.getMovies();
   }
 }

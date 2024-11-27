@@ -1,1 +1,1 @@
-const String baseUrl = 'https://api.tvmaze.com';
+const String baseUrl = 'http://api.tvmaze.com';
