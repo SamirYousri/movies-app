@@ -13,15 +13,13 @@ class MovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // التحقق من الرابط والتأكد من أنه رابط HTTP صالح
     String imageUrl = movie.image;
 
-    // التحقق من أن الرابط يبدأ بـ "http://" أو "https://"
     bool isValidImageUrl = imageUrl.isNotEmpty && imageUrl.startsWith('http');
 
     return ListTile(
       leading: isValidImageUrl
-          ? Image.network(imageUrl) // إذا كان الرابط صالحًا
+          ? Image.network(imageUrl)
           : Image.asset(
               'assets/images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg'), // صورة محلية بديلة
       title: Text(movie.title),

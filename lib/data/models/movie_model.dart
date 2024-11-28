@@ -17,18 +17,14 @@ class MovieModel extends Movie {
           premiereDate: premiereDate,
         );
 
-  // تحويل البيانات من JSON إلى MovieModel
   factory MovieModel.fromJson(Map<String, dynamic> json) {
     return MovieModel(
       title: json['show']['name'] ?? 'Unknown',
-      image: json['show']['image']?['medium'] ??
-          '', // إذا لم توجد الصورة، استخدم رابط فارغ
+      image: json['show']['image']?['medium'] ?? '',
       summary: json['show']['summary'] ?? 'No summary available',
-      genres: List<String>.from(
-          json['show']['genres'] ?? []), // تحويل genres إلى قائمة نصوص
-      runtime: json['show']['runtime'] ?? 0, // إذا لم توجد مدة العرض، استخدم 0
-      premiereDate: json['show']['premiered'] ??
-          'Unknown', // إذا لم يوجد تاريخ العرض، استخدم 'Unknown'
+      genres: List<String>.from(json['show']['genres'] ?? []),
+      runtime: json['show']['runtime'] ?? 0,
+      premiereDate: json['show']['premiered'] ?? 'Unknown',
     );
   }
 }

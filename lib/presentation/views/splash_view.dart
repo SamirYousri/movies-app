@@ -8,14 +8,14 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, '/BottomNavigation');
     });
 
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
         child: Image.asset(
-          'assets/images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg', // استخدم رابط صورة مناسب
+          'assets/images/tyson-moultrie-BQTHOGNHo08-unsplash.jpg',
           height: 200,
         ),
       ),

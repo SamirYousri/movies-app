@@ -2,9 +2,9 @@ class Movie {
   final String title;
   final String image;
   final String summary;
-  final List<String> genres; // قائمة بالأنواع
-  final int runtime; // مدة العرض
-  final String premiereDate; // تاريخ العرض الأول
+  final List<String> genres;
+  final int runtime;
+  final String premiereDate;
 
   Movie({
     required this.title,

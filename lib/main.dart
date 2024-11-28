@@ -8,11 +8,12 @@ import 'package:movies_app/domain/use_case/search_movies_use_case.dart';
 import 'package:movies_app/presentation/managers/home_cubit/home_cubit.dart';
 import 'package:movies_app/presentation/managers/search_cubit/search_cubit.dart';
 import 'package:movies_app/presentation/views/details_view.dart';
+import 'package:movies_app/presentation/views/home_view.dart';
 import 'package:movies_app/presentation/views/search_view.dart';
+import 'package:movies_app/presentation/views/splash_view.dart';
 import 'package:movies_app/presentation/views/widgets/bottom_navigation_view.dart';
 
 void main() {
-  // إعداد Dio والـ Repository والـ UseCases
   final dio = Dio();
   final movieRemoteDatasource = MovieRemoteDatasource(dio);
   final movieRepository = MovieRepositoryImpl(movieRemoteDatasource);
@@ -48,9 +49,11 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => const BottomNavigationScreen(),
+          '/': (context) => const SplashScreen(),
+          '/BottomNavigation': (context) => const BottomNavigationScreen(),
           '/details': (context) => const DetailsScreen(),
           '/search': (context) => const SearchScreen(),
+          '/home': (context) => const HomeScreen(),
         },
       ),
     );

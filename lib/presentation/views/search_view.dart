@@ -22,7 +22,7 @@ class SearchScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: searchController,
-              style: const TextStyle(color: Colors.black), // لون النص أسود
+              style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
                 hintText: 'Search movies...',
                 border: const OutlineInputBorder(),

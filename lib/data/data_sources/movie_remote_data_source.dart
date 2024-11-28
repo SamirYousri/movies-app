@@ -10,11 +10,9 @@ class MovieRemoteDatasource {
 
   MovieRemoteDatasource(this.dio);
 
-  // تهيئة Dio مع تجاوز تحقق SSL
   static Dio setupDio() {
     Dio dio = Dio();
 
-    // تجاوز تحقق SSL
     (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
         (client) {
       client.badCertificateCallback =
@@ -25,26 +23,24 @@ class MovieRemoteDatasource {
     return dio;
   }
 
-  // استرجاع الأفلام
   Future<List<Movie>> fetchMovies() async {
     final dio = setupDio();
     final response = await dio.get('$baseUrl/search/shows?q=all');
 
     if (response.statusCode == 200) {
-      final List data = response.data; // بيانات JSON من API
+      final List data = response.data;
       return data.map((json) => MovieModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load movies');
     }
   }
 
-  // البحث عن الأفلام
   Future<List<Movie>> searchMovies(String query) async {
     final dio = setupDio();
     final response = await dio.get('$baseUrl/search/shows?q=$query');
 
     if (response.statusCode == 200) {
-      final List data = response.data; // بيانات JSON من API
+      final List data = response.data;
       return data.map((json) => MovieModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to search movies');

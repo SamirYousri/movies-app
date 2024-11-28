@@ -8,7 +8,7 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this.searchMoviesUseCase) : super(SearchInitial());
 
   void searchMovies(String query) async {
-    if (query.isEmpty) return; // تجاهل إذا كانت خانة البحث فارغة
+    if (query.isEmpty) return;
     emit(SearchLoading());
     try {
       final movies = await searchMoviesUseCase(query);
